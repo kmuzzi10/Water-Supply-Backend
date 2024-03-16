@@ -27,6 +27,21 @@ app.use(morgan('dev'));
 
 
 // Routes
+app.get('/',(req,res)=>{
+    try {
+        res.status(200).send({
+            success:true,
+            message:"Hello this is Water Supply Backend"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:"internal server error",
+            error
+        })
+    }
+})
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/offer", offerRoutes);
