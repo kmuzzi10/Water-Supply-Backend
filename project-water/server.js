@@ -37,5 +37,5 @@ app.use("/api/v1/orders", orderRoutes);
 // Server Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Server is running on ${port}`);
+    console.log(`Server is running on ${PORT}`);
 });
