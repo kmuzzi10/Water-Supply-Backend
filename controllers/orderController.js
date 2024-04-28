@@ -3,12 +3,12 @@ import orderModel from "../models/orderModel.js";
 
 export const postOrderController = async (req, res) => {
     try {
-        const { productsId, dateAndTime, userId, status, totalPrice, lat, long } = req.body;
+        const { productsId, payment, dateAndTime, userId, status, totalPrice, lat, long } = req.body;
 
         // Create a new order instance
         const newOrder = new orderModel({
             productsId,
-            payment: "Cash On Delivery",
+            payment,
             dateAndTime,
             userId,
             status,
@@ -31,7 +31,7 @@ export const postOrderController = async (req, res) => {
 
 export const getOrderController = async (req, res) => {
     try {
-        const orders = await orderModel.find({ userId: req.user._id }).populate("products", "-photo").populate("buyer", "name").populate("status");
+        const orders = await orderModel.find({ userId: req.user._id }).populate("productsId", "-photo").populate("userId", "name").populate("status");
         res.json(orders)
     } catch (err) {
         console.log(err);
