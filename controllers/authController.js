@@ -10,7 +10,7 @@ export const registerController = async (req, res) => {
     try {
         console.log("Received request body:", req.body);
         const { email, password, phone, address } = req.body;
-        
+
         // Validations
         if (!email) {
             return res.status(400).json({ message: "Email is Required" });
@@ -126,7 +126,7 @@ export const loginController = async (req, res) => {
 export const registerDriverController = async (req, res) => {
     try {
         console.log("Received request body:", req.body);
-        const { driverId, name, email, password, phone, address } = req.body;
+        const { driverId, name, email, password, phone, address, lat, long } = req.body;
         //validations
         if (!driverId) {
             return res.status(400).json({ message: "ID is Required" });
@@ -165,6 +165,8 @@ export const registerDriverController = async (req, res) => {
             phone,
             address,
             password: hashedPassword,
+            lat,
+            long
         }).save();
 
         res.status(201).json({
@@ -243,7 +245,7 @@ export const loginDriverController = async (req, res) => {
 
 
 
-export const getDriverDriverController = async (req,res)=>{
+export const getDriverDriverController = async (req, res) => {
     try {
         const products = await driverModel.find({})
         res.status(200).send({

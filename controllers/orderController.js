@@ -4,6 +4,7 @@ import orderModel from "../models/orderModel.js";
 export const postOrderController = async (req, res) => {
     try {
         const { productsId, payment, dateAndTime, userId, status, totalPrice, lat, long } = req.body;
+        const driver = "662e907919cb6ecc563e1dfa"
 
         // Create a new order instance
         const newOrder = new orderModel({
@@ -14,7 +15,8 @@ export const postOrderController = async (req, res) => {
             status,
             totalPrice,
             lat,
-            long
+            long,
+            driver
         });
 
         // Save the order to the database
@@ -54,6 +56,7 @@ export const getAllOrderController = async (req, res) => {
                 select: "name address" // Include both name and address fields
             })
             .populate("status")
+            .populate("driver")
             .sort({ createdAt: -1 });
         res.json(orders);
     } catch (err) {

@@ -34,6 +34,10 @@ const orderSchema = new mongoose.Schema({
     },
     long:{
         type:String
+    },
+    driver:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Driver"
     }
 }, { timestamps: true });
 
